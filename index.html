@@ -26,6 +26,21 @@
         <span class="caret">❯ </span>
         <input v-model="input" type="text" placeholder="write stuff, hit enter" autofocus>
       </div>
+
+      <div v-show="showControl" class="control">
+        <span class="filter"
+          @click="filter = 'all'"
+          :class="{ current: filter === 'all' }">
+        All</span>
+        <span class="filter"
+          @click="filter = 'active'"
+          :class="{ current: filter === 'active' }">
+        Active</span>
+        <span class="filter"
+          @click="filter = 'complete'"
+          :class="{ current: filter === 'complete' }">
+        Complete</span>
+      </div>
     </div>
 
     <footer>
