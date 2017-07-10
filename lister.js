@@ -3,6 +3,8 @@ var lister = new Vue({
   data: {
     input: '',
     items: [
+      { id: 0, isActive: true, text: 'Buy milk.' },
+      { id: 1, isActive: false, text: 'Learn Vue.' }
     ],
     filter: 'all'
   },
