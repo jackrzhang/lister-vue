@@ -24,7 +24,34 @@
     <div id="lister">
       <div class="input">
         <span class="caret">❯ </span>
-        <input v-model="input" type="text" placeholder="write stuff, hit enter" autofocus>
+        <input type="text" class="new-item" placeholder="write stuff, hit enter" autofocus
+          v-model="input"
+          @keydown.enter="addItem">
+      </div>
+
+      <div
+        v-for="item in filteredItems"
+        :item="item"
+        :key="item.id">
+        <div class="entry">
+          <template v-if="!item.isEditing">
+            <span class="action checkmark" @click="checkItem(item.id)">☑</span>
+            <span class="text" :class="{ complete: !item.isActive }">{{ item.text }}</span>
+            <span class="container">
+              <span class="action edit" @click="editItem(item.id)">▼</span>
+              <span class="action x" @click="removeItem(item.id)">×</span>
+            </span>
+          </template>
+          <template v-else>
+            <span class="edit-container">
+              <input type="text" class="edit-item" 
+                v-focus
+                v-model="item.editedText"
+                @keydown.enter="completeEdit(item.id)">
+              <span class="action x" @click.stop="cancelEdit(item.id)">×</span>
+            </span>
+          </template>
+        </div>
       </div>
 
       <div v-show="showControl" class="control">
